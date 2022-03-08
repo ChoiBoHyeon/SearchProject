@@ -7,13 +7,13 @@
     <insert id="createPost" parameterType="com.example.searchproject.dto.SearchDto">
         INSERT INTO search (id,
                             title,
-                            write,
+                            writer,
                             date
         )
         values (#{id},
                 #{title},
-                #{write},
-                #{date}
+                #{writer},
+                NOW()
                )
 
     </insert>
