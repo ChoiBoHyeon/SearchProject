@@ -7,14 +7,34 @@
     <insert id="createPost" parameterType="com.example.searchproject.dto.SearchDto">
         INSERT INTO search (id,
                             title,
-                            writer,
+                            content,
                             date
         )
         values (#{id},
                 #{title},
-                #{writer},
+                #{content},
                 NOW()
                )
 
     </insert>
+
+    <select id="findID" resultType="com.example.searchproject.dto.SearchDto">
+        select *
+        from search
+        where id = #{id}
+    </select>
+
+    <update id="change">
+        update search
+        set title = #{title},
+            content = #{content},
+            date = NOW()
+        where id  = #{id}
+    </update>
+
+    <delete id="delet">
+        delete from search
+        where id = #{id}
+    </delete>
+
 </mapper>

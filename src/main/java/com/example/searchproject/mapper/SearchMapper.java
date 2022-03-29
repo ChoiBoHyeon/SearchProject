@@ -7,5 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 public interface SearchMapper {
     void createPost(SearchDto searchDto);
 
-    SearchDto find(String find);
+    SearchDto findID(Integer in);
+
+    void change(SearchDto searchDto);
+
+    void delet(SearchDto searchDto);
 }

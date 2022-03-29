@@ -6,13 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
 @Transactional
 @Service
 public class SearchService {
+
     SearchMapper searchMapper;
-    LocalDateTime localDateTime = LocalDateTime.now();
 
     @Autowired
     public SearchService(SearchMapper searchMapper) {
@@ -20,11 +18,19 @@ public class SearchService {
     }
 
     public void createPost(SearchDto searchDto){
-        searchDto.setDate(localDateTime);
         searchMapper.createPost(searchDto);
     }
 
-    public SearchDto find(String search){
-        return searchMapper.find(search);
+    public SearchDto findId(Integer id){
+        return searchMapper.findID(id);
     }
+
+    public void change(SearchDto searchDto){
+        searchMapper.change(searchDto);
+    }
+
+    public void delet(SearchDto searchDto){
+        searchMapper.delet(searchDto);
+    }
+
 }
