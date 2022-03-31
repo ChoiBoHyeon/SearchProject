@@ -69,6 +69,7 @@ public class SearchController {
     @GetMapping("/searchervice/search/{title}")
     public List<Post> titlesearch(@PathVariable("title") String title){
         return searchService.titlesearch(title);
+        
     }
 
 }
