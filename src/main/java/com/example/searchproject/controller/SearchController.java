@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 //@Controller
 @RestController
 @Slf4j
@@ -18,8 +20,9 @@ public class SearchController {
         this.searchService = searchService;
     }
     private SearchService searchService;
-    SearchDto searchDto;
+    private SearchDto searchDto;
 
+    //게시글 작성
     @GetMapping("searchservice/{id}")
     public ResponseEntity<String> findID(@PathVariable("id") Integer id) {
         searchService.findId(id);
@@ -46,12 +49,26 @@ public class SearchController {
     }
 
     //게시물 삭제
-    @DeleteMapping("/searchservice/deletposting/{id}")
-    public ResponseEntity delet(
-            @PathVariable("id") Integer id,
-            @RequestBody SearchDto searchDto){
-        searchDto.setId(id);
-        searchService.delet(searchDto);
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("게시물이 삭제 되었습니다.");
+    @DeleteMapping("/searchservice/deleteposting/{id}")
+    public ResponseEntity<String> delete(
+            @PathVariable ("id") Integer id){
+        try {
+            id = searchService.findId(id).getId();
+        }
+        catch (java.lang.NullPointerException e1) {
+            return ResponseEntity.status(HttpStatus.OK).body("해당 게시글은 없습니다.");
+        }
+        if (id != null){
+            searchService.deletePosting(id);
+            return ResponseEntity.status(HttpStatus.OK).body(id + "번의 게시글이 삭제되었습니다.");
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body("이 메세지가 나올리가 없다.");
+        }
     }
+
+    @GetMapping("/searchervice/search/{title}")
+    public List<Post> titlesearch(@PathVariable("title") String title){
+        return searchService.titlesearch(title);
+    }
+
 }

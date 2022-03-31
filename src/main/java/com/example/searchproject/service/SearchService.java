@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 @Service
 public class SearchService {
@@ -29,8 +31,12 @@ public class SearchService {
         searchMapper.change(searchDto);
     }
 
-    public void delet(SearchDto searchDto){
-        searchMapper.delet(searchDto);
+    public void deletePosting(Integer searchDto){
+        searchMapper.delete(searchDto);
+    }
+
+    public List<Post> titlesearch(String title){
+        return  searchMapper.titlesearch(title);
     }
 
 }
