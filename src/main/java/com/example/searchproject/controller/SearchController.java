@@ -1,6 +1,7 @@
 package com.example.searchproject.controller;
 
 import com.example.searchproject.dto.SearchDto;
+import com.example.searchproject.model.Criteria;
 import com.example.searchproject.service.SearchService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class SearchController {
     private SearchService searchService;
     private SearchDto searchDto;
 
-    //게시글 작성
+    //게시글 검색
     @GetMapping("searchservice/{id}")
     public ResponseEntity<String> findID(@PathVariable("id") Integer id) {
         searchService.findId(id);
@@ -65,11 +66,17 @@ public class SearchController {
             return ResponseEntity.status(HttpStatus.OK).body("이 메세지가 나올리가 없다.");
         }
     }
-
+    // tile 검색
     @GetMapping("/searchervice/search/{title}")
-    public List<Post> titlesearch(@PathVariable("title") String title){
+    public List<SearchDto> titlesearch(@PathVariable("title") String title){
         return searchService.titlesearch(title);
         
+    }
+    // 게시물 리스트
+    @GetMapping("/list")
+    public List<SearchDto> boardListGET(Criteria cri) {
+        return searchService.getListPaging(cri);
+
     }
 
 }

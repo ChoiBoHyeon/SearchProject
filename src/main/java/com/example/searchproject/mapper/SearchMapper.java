@@ -1,6 +1,7 @@
 package com.example.searchproject.mapper;
 
 import com.example.searchproject.dto.SearchDto;
+import com.example.searchproject.model.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,7 +17,9 @@ public interface SearchMapper {
 
     void delete(Integer id);
 
-    List<Post> titlesearch(
+    List<SearchDto> getListPaging(Criteria cri);
+
+    List<SearchDto> titlesearch(
             @Param("tilte") String title
     );
 }

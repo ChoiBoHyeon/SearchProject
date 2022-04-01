@@ -8,7 +8,7 @@
         INSERT INTO search (id,
                             title,
                             content,
-                            date
+                            postdate
         )
         values (#{id},
                 #{title},
@@ -28,7 +28,7 @@
         update search
         set title = #{title},
             content = #{content},
-            date = NOW()
+            postdate = NOW()
         where id  = #{id}
     </update>
 
@@ -36,5 +36,23 @@
         delete from search
         where id = #{id}
     </delete>
+
+    <select id="titlesearch" resultType="com.example.searchproject.dto.SearchDto">
+        select *
+        from search
+        where title like '%title%'
+        limit #{skip},#{amount}
+
+    </select>
+
+    <!-- 게시물 목록(페이징) -->
+    <select id="getListPaging" resultType="com.example.searchproject.dto.SearchDto">
+
+        select * from (
+        select id, title, content, postdate
+        from search order by id desc) as T1
+        limit #{skip},#{amount}
+
+    </select>
 
 </mapper>

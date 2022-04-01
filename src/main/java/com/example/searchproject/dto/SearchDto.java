@@ -15,7 +15,7 @@ public class SearchDto {
 
     private String content;
 
-    private LocalDateTime date;
+    private LocalDateTime postdate;
 
 }
 

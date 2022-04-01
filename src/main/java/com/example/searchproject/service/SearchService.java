@@ -2,6 +2,7 @@ package com.example.searchproject.service;
 
 import com.example.searchproject.dto.SearchDto;
 import com.example.searchproject.mapper.SearchMapper;
+import com.example.searchproject.model.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,8 +36,11 @@ public class SearchService {
         searchMapper.delete(searchDto);
     }
 
-    public List<Post> titlesearch(String title){
+    public List<SearchDto> titlesearch(String title){
         return  searchMapper.titlesearch(title);
     }
 
+    public List<SearchDto> getListPaging(Criteria cri) {
+        return searchMapper.getListPaging(cri);
+    }
 }
