@@ -67,9 +67,9 @@ public class SearchController {
         }
     }
     // tile 검색
-    @GetMapping("/searchervice/search/{title}")
-    public List<SearchDto> titlesearch(@PathVariable("title") String title){
-        return searchService.titlesearch(title);
+    @GetMapping("/searchervice/search")
+    public List<SearchDto> titlesearch(Criteria cri){
+        return searchService.titlesearch(cri);
         
     }
     // 게시물 리스트

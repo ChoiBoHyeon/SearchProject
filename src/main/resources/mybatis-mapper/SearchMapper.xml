@@ -38,11 +38,12 @@
     </delete>
 
     <select id="titlesearch" resultType="com.example.searchproject.dto.SearchDto">
-        select *
+        select * from (
+        select id, title, content, postdate
         from search
-        where title like '%title%'
+        where title like concat ('%',#{keyword},'%')
+        order by title desc) as T1
         limit #{skip},#{amount}
-
     </select>
 
     <!-- 게시물 목록(페이징) -->
@@ -53,6 +54,13 @@
         from search order by id desc) as T1
         limit #{skip},#{amount}
 
+    </select>
+
+    <select id="getTotal" resultType="int">
+        select count(*) from vam_board
+        <if test="keyword != null">
+            where title like concat('%',#{keyword},'%')
+        </if>
     </select>
 
 </mapper>
