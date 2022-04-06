@@ -66,17 +66,26 @@ public class SearchController {
             return ResponseEntity.status(HttpStatus.OK).body("이 메세지가 나올리가 없다.");
         }
     }
-    // tile 검색
-    @GetMapping("/searchervice/search")
-    public List<SearchDto> titlesearch(Criteria cri){
-        return searchService.titlesearch(cri);
-        
+
+    // tile,id,postdate 검색
+    @GetMapping("/searchervice/title/search")
+    public List<SearchDto> TitleSearch(Criteria cri){
+        return searchService.TitleSearch(cri);
     }
+
+    @GetMapping("/searchervice/id/search")
+    public List<SearchDto> IdSearch(Criteria cri){
+        return searchService.IDSearch(cri);
+    }
+
+    @GetMapping("/searchervice/postdate/search")
+    public List<SearchDto> PostdateSearch(Criteria cri){
+        return searchService.PostdateSearch(cri);
+    }
+
     // 게시물 리스트
     @GetMapping("/list")
     public List<SearchDto> boardListGET(Criteria cri) {
         return searchService.getListPaging(cri);
-
     }
-
 }

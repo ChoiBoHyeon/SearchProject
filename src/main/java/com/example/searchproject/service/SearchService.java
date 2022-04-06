@@ -36,15 +36,19 @@ public class SearchService {
         searchMapper.delete(searchDto);
     }
 
-    public List<SearchDto> titlesearch(Criteria cri){
-        return  searchMapper.titlesearch(cri);
+    public List<SearchDto> TitleSearch(Criteria cri){
+        return  searchMapper.TitleSearch(cri);
+    }
+
+    public List<SearchDto> IDSearch(Criteria cri){
+        return  searchMapper.IdSearch(cri);
+    }
+
+    public List<SearchDto> PostdateSearch(Criteria cri){
+        return  searchMapper.PostdateSearch(cri);
     }
 
     public List<SearchDto> getListPaging(Criteria cri) {
         return searchMapper.getListPaging(cri);
-    }
-
-    public int getTotal(Criteria criteria){
-        return searchMapper.getTotal(criteria);
     }
 }

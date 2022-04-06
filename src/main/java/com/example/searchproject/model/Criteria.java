@@ -13,6 +13,12 @@ public class Criteria {
     // 스킵 할 게시물 수( (pageNum-1) * amount )
     private int skip;
 
+    // Posting id 검색
+    private int id;
+
+    // Posting 날짜 검색
+    private String postdate;
+
     // 기본 생성자 -> 기봅 세팅 : pageNum = 1, amount = 5
     public Criteria() {
         //this(1, 5);
@@ -22,11 +28,13 @@ public class Criteria {
     }
 
     // 유저가 원하는 pageNum, 원하는 amount, 원하는 keyword
-    public Criteria(int pageNum, int amount, String keyword) {
+    public Criteria(int pageNum, int amount, String keyword, int id, String postdate) {
         this.pageNum = pageNum;
         this.amount = amount;
         this.skip = (pageNum - 1) * amount;
         this.keyword = keyword;
+        this.id = id;
+        this.postdate = postdate;
     }
 
     public int getPageNum() {
@@ -61,6 +69,22 @@ public class Criteria {
 
     public void setKeyword(String keyword) {
         this.keyword = keyword;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPostdate() {
+        return postdate;
+    }
+
+    public void setPostdate(String postdate) {
+        this.postdate = postdate;
     }
 
     @Override

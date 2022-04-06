@@ -18,7 +18,9 @@ public interface SearchMapper {
 
     List<SearchDto> getListPaging(Criteria cri);
 
-    List<SearchDto> titlesearch(Criteria cri);
+    List<SearchDto> TitleSearch(Criteria cri);
 
-    int getTotal(Criteria criteria);
+    List<SearchDto> IdSearch(Criteria cri);
+
+    List<SearchDto> PostdateSearch(Criteria cri);
 }

@@ -37,7 +37,8 @@
         where id = #{id}
     </delete>
 
-    <select id="titlesearch" resultType="com.example.searchproject.dto.SearchDto">
+    <!-- keyword로 title 검색 -->
+    <select id="TitleSearch" resultType="com.example.searchproject.dto.SearchDto">
         select * from (
         select id, title, content, postdate
         from search
@@ -46,21 +47,32 @@
         limit #{skip},#{amount}
     </select>
 
+    <!-- keyword로 id 검색 -->
+    <select id="IdSearch" resultType="com.example.searchproject.dto.SearchDto">
+        select * from (
+            select id, title, content, postdate
+            from search
+            where id like concat ('%',#{id},'%')
+            order by id desc) as T1
+            limit #{skip},#{amount}
+    </select>
+
+    <!-- keyword로 postdate 검색 -->
+    <select id="PostdateSearch" resultType="com.example.searchproject.dto.SearchDto">
+        select * from (
+            select id, title, content, postdate
+            from search
+            where postdate like concat ('%',#{postdate},'%')
+            order by postdate desc) as T1
+            limit #{skip},#{amount}
+    </select>
+
     <!-- 게시물 목록(페이징) -->
     <select id="getListPaging" resultType="com.example.searchproject.dto.SearchDto">
-
         select * from (
         select id, title, content, postdate
         from search order by id desc) as T1
         limit #{skip},#{amount}
-
-    </select>
-
-    <select id="getTotal" resultType="int">
-        select count(*) from vam_board
-        <if test="keyword != null">
-            where title like concat('%',#{keyword},'%')
-        </if>
     </select>
 
 </mapper>
