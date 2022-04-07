@@ -14,6 +14,7 @@ import java.util.List;
 //@Controller
 @RestController
 @Slf4j
+@RequestMapping(value = "/api")
 public class SearchController {
 
     @Autowired
@@ -24,7 +25,7 @@ public class SearchController {
     private SearchDto searchDto;
 
     //게시글 검색
-    @GetMapping("searchservice/{id}")
+    @GetMapping("/searchservice/{id}")
     public ResponseEntity<String> findID(@PathVariable("id") Integer id) {
         searchService.findId(id);
         String DBTitle = searchService.findId(id).getTitle();
